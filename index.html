@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CSE 103 · Discrete Mathematics · HSTU</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=JetBrains+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- ═══ API MODAL ═══ -->
+<div class="ov" id="modal">
+  <div class="mbox">
+    <div class="mlogo">∀</div>
+    <h2 class="mtitle">CSE 103 AI Assistant</h2>
+    <p class="muniv">Hajee Mohammad Danesh Science &amp; Technology University</p>
+    <p class="mdesc">Enter your <strong>Anthropic API Key</strong> to unlock the AI Solver.<br/>Your key is saved in this browser so you only enter it once.</p>
+    <div class="kwrap">
+      <input type="password" id="keyIn" placeholder="sk-ant-api03-…" autocomplete="off"/>
+      <button class="keye" onclick="toggleEye()">👁</button>
+    </div>
+    <div class="merr" id="merr"></div>
+    <button class="mgo" onclick="saveKey()">Activate AI →</button>
+    <p class="mhint">Get a free key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a></p>
+    <p class="mhint" style="margin-top:6px;font-size:10.5px;color:#2a3855;">Your key is saved locally in your browser only.</p>
+  </div>
+</div>
+
+<!-- ═══ TOPNAV ═══ -->
+<nav class="nav">
+  <div class="nl">
+    <div class="nlogo">∀</div>
+    <div>
+      <div class="ntitle">CSE 103 — Discrete Mathematics</div>
+      <div class="nsub">HSTU &nbsp;·&nbsp; K. H. Rosen, 8th Edition</div>
+    </div>
+  </div>
+  <div class="nr">
+    <span class="bdg bbl">8th Ed.</span>
+    <span class="bdg bgr">AI Solver</span>
+    <span class="bdg bpu">HSTU CSE</span>
+    <button class="abtn" id="aiStatusBtn" onclick="openModal()">
+      <span class="dot doff" id="sDot"></span>
+      <span id="sLbl">Connect AI</span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══ LAYOUT ═══ -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sb">
+    <div class="sbh">
+      <span class="ey">Course Chapters</span>
+      <p>Rosen — Discrete Mathematics &amp; Its Applications</p>
+    </div>
+    <div class="chl" id="chList"></div>
+    <div class="sbs">
+      <span class="ey">Quick Topics</span>
+      <button class="qb" data-q="Explain propositional logic with complete truth tables for AND, OR, NOT, IMPLICATION, BICONDITIONAL. Show all logical equivalences with proofs.">📐 Logic &amp; Truth Tables</button>
+      <button class="qb" data-q="Teach mathematical induction step by step and prove 1+2+3+...+n = n(n+1)/2 with full base case and inductive step.">🔁 Mathematical Induction</button>
+      <button class="qb" data-q="Explain the Pigeonhole Principle with 4 different examples including the birthday paradox.">🐦 Pigeonhole Principle</button>
+      <button class="qb" data-q="Explain Big-O, Big-Omega, Big-Theta notation with examples. Compare O(1), O(log n), O(n), O(n log n), O(n^2), O(2^n).">⚡ Algorithm Complexity</button>
+      <button class="qb" data-q="Explain RSA encryption step by step: key generation, encryption, decryption. Show a small numerical example using number theory from Chapter 4.">🔐 RSA Encryption</button>
+      <button class="qb" data-q="Explain graph coloring, chromatic numbers, and the four color theorem with examples.">🎨 Graph Coloring</button>
+    </div>
+    <div class="sbs">
+      <span class="ey">Homework Help</span>
+      <button class="qb" data-q="Explain when to use permutations vs combinations with all formulas and multiple solved examples.">🔢 Permutations &amp; Combinations</button>
+      <button class="qb" data-q="Explain Dijkstra shortest path algorithm step by step with a full worked numerical example on a weighted graph.">🗺️ Shortest Path Algorithm</button>
+      <button class="qb" data-q="Teach the Euclidean Algorithm and Extended Euclidean Algorithm for GCD with multiple worked examples.">📊 GCD &amp; Euclidean Algo</button>
+      <button class="qb" data-q="Explain recurrence relations and how to solve them using characteristic equations with examples of distinct and repeated roots.">🌀 Recurrence Relations</button>
+    </div>
+    <div class="sbf">
+      <div class="sbfa">CSE 103 · HSTU · Dinajpur, Bangladesh</div>
+      <div class="sbfb">Powered by Claude AI (Anthropic)</div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hi">
+        <div>
+          <h1 class="ht">Discrete <em>Mathematics</em><br/>AI Study Hub</h1>
+          <p class="hd">Your intelligent companion for CSE 103 at HSTU.<br/>Solve problems, master proofs, ace your exams.</p>
+        </div>
+        <div class="hstats">
+          <div class="hstat"><span class="hsv">13</span><span class="hsl">Chapters</span></div>
+          <div class="hstat"><span class="hsv">∞</span><span class="hsl">Problems</span></div>
+          <div class="hstat"><span class="hsv">24/7</span><span class="hsl">AI Help</span></div>
+          <div class="hstat"><span class="hsv">8th</span><span class="hsl">Edition</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab on"  data-t="chat">🤖 AI Solver</button>
+      <button class="tab"     data-t="syl">📚 Syllabus</button>
+      <button class="tab"     data-t="form">📐 Formulas</button>
+      <button class="tab"     data-t="prac">🧩 Practice</button>
+      <button class="tab"     data-t="about">👤 About</button>
+    </div>
+
+    <!-- CHAT PANEL -->
+    <div class="panel on" id="p-chat">
+      <div class="msgs" id="msgs"></div>
+      <div class="cin">
+        <div class="irow">
+          <textarea id="inp" rows="1" placeholder="Ask any Discrete Math question, paste your homework, request a proof…"></textarea>
+          <button class="sbtn" id="sbtn">
+            <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+          </button>
+        </div>
+        <div class="chips">
+          <button class="chip" data-q="Prove by induction: 1^2 + 2^2 + ... + n^2 = n(n+1)(2n+1)/6 with all steps">Sum of squares proof</button>
+          <button class="chip" data-q="Explain Euler circuits vs Hamiltonian paths with examples and conditions for each">Euler vs Hamilton</button>
+          <button class="chip" data-q="Solve a system of congruences using the Chinese Remainder Theorem with a full worked example">Chinese Remainder Theorem</button>
+          <button class="chip" data-q="Explain finite state machines with an example automaton that accepts strings ending in 01">FSM &amp; Automata</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SYLLABUS PANEL -->
+    <div class="panel" id="p-syl">
+      <div class="ps">
+        <div class="ph"><h2>Course Syllabus</h2><p>CSE 103 · Discrete Mathematics and Its Applications · Kenneth H. Rosen, 8th Edition · HSTU</p></div>
+        <div class="cgrid" id="cgrid"></div>
+      </div>
+    </div>
+
+    <!-- FORMULAS PANEL -->
+    <div class="panel" id="p-form">
+      <div class="ps">
+        <div class="ph"><h2>Formula Reference Sheet</h2><p>Key formulas, theorems and identities from Rosen's Discrete Mathematics — 8th Edition</p></div>
+        <div class="fgrid" id="fgrid"></div>
+      </div>
+    </div>
+
+    <!-- PRACTICE PANEL -->
+    <div class="panel" id="p-prac">
+      <div class="ps">
+        <div class="ph"><h2>Practice Problems</h2><p>Graded problems from each chapter — click "Solve with AI" for full step-by-step solutions</p></div>
+        <div class="plist" id="plist"></div>
+      </div>
+    </div>
+
+    <!-- ABOUT PANEL -->
+    <div class="panel" id="p-about">
+      <div class="ps">
+        <div class="agrid" id="agrid"></div>
+      </div>
+    </div>
+
+  </main>
+</div><!-- /.layout -->
+
+<script src="app.js"></script>
+</body>
+</html>
